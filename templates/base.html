@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CivicResolve connects citizens with public service departments and helps track grievances.">
+  <title>{% block title %}CivicResolve{% endblock %} · CivicResolve</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">C</span><span>Civic<span class="brand-accent">Resolve</span><small>YOUR VOICE. PUBLIC ACTION.</small></span></a>
+<nav aria-label="Main navigation">
+<a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('track') }}">Track</a>
+{% if current_user %}<a href="{{ url_for('officer_dashboard') if current_user.role == 'officer' else url_for('dashboard') }}">{{ 'Officer Desk' if current_user.role == 'officer' else 'My Dashboard' }}</a>
+<form class="nav-form" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="nav-link" type="submit">Sign out</button></form>
+{% else %}<a href="{{ url_for('login') }}">Sign in</a><a class="nav-cta" href="{{ url_for('register') }}">Get started</a>{% endif %}
+</nav></header>
+<main class="container">
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="alerts" aria-live="polite">{% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<footer><div class="footer-inner"><strong>CivicResolve</strong><span>Designed for transparent, accountable public services.</span><span>Prototype · Verify local department procedures before real-world use.</span></div></footer>
+</body></html>
