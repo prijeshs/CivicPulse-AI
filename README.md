@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # CivicResolve
 **AI-assisted citizen grievance management and resolution**
 
@@ -85,6 +85,4 @@ For production, also configure `DATABASE_URL` and `SECRET_KEY` securely. `--allo
 
 ## Repository size
 The project contains source code and lightweight assets only. Do not commit virtual environments, database files, secrets, build output or personal data.
-=======
 # CivicPulse-AI
->>>>>>> 6fb2057c39681b16fa2bd1427205408e34afded7
